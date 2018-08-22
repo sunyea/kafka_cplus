@@ -11,34 +11,34 @@ Kafka应用封装类，基于C++
 
 ## 1.2. 新建子类
 在项目新建C++类（如：ServerKafka），继承自Kafka类，并实现构造函数，必须重载command方法<br>
-<code>
+```
 void command(string &message, string &out_msg);
 {
     ...
 }
-</code>
+```
 重载的command方法来完成waitForAction()方法具体的业务逻辑，如果不需要使用waitForAction方法，可以不创建新的子类。
 
 ## 1.3. 使用实例
 要使用Kafka实例(或子类实例)时，先进行对象创建，使用:
-<code>
+```
 Kafka *kafka = new Kafka(hosts);
-</code>
+```
 创建时需要提供hosts参数，表示kafka的服务列表，可以跟多个IP:port,IP:port的方式，中间以逗号隔开。<br>
 在使用实例之前，要先调用start()初始化，使用结束后调用stop()清理。
-<code>
+```
 kafka->start(...);
 //具体业务代码
 kafka->stop();
-</code>
+```
 
 ## 1.4. 服务程序实现
 具体业务需求：等待前端的请求，并进行相应业务处理，将结果返回给前端。<br>
-*首先新建Kafka子类，重载command方法来实现对前端请求的解析及业务处理;
-*然后在服务主程序中创建该子类对象，并使用start()进行初始化;
-*使用while(true)建立消息循环，在循环体中使用waitForAction()处理前端请求;
-*当处理请求出现异常，先用stop()停止对象，然后使用start()重启对象，并继续处理前端请求;
-<code>
+* 首先新建Kafka子类，重载command方法来实现对前端请求的解析及业务处理;
+* 然后在服务主程序中创建该子类对象，并使用start()进行初始化;
+* 使用while(true)建立消息循环，在循环体中使用waitForAction()处理前端请求;
+* 当处理请求出现异常，先用stop()停止对象，然后使用start()重启对象，并继续处理前端请求;
+```
 ServerKafka *kafka = new ServerKafka(hosts);
 kafka->_loger->info("开始启动服务...");
 rt = kafka->start(in_topic, out_topic, group);
@@ -54,7 +54,7 @@ while (true) {
         kafka->start(in_topic, out_topic, group);
     }
 }
-</code>
+```
 
 ## 1.5. 调用其他服务
 具体业务需求：发起一个远程请求，并等待回馈。<br>
