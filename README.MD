@@ -112,3 +112,4 @@ Kafka应用封装类，基于C++
         sudo make install
     ```
     *查看目录/usr/local/lib下有没有生成liblog4cplus*.so等库文件，如果有表示安装成功。
+    test
