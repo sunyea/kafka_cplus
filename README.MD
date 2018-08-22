@@ -58,45 +58,45 @@ while (true) {
 
 ## 1.5. 调用其他服务
 具体业务需求：发起一个远程请求，并等待回馈。<br>
-*创建Kafka对象，使用start()进行初始化;
-*使用requestAndResponse()发起请求，并得到回馈;
-*返回值为KFK_ERR_NOERROR时，表示正确得到回馈信息;
+* 创建Kafka对象，使用start()进行初始化;
+* 使用requestAndResponse()发起请求，并得到回馈;
+*  返回值为KFK_ERR_NOERROR时，表示正确得到回馈信息;
 *使用完之后用stop()清理资源并结束。
 
 ## 1.6. 发送一批信息到kafka
 具体业务需求：将一批信息发送到同一个主题。<br>
-*创建Kafka对象，使用start()进行初始化;
-*使用send_always()发送一条信息，如需发送多条，则多次调用该方法;
-*返回值为KFK_ERR_NOERROR时，表示正确发送信息;
-*使用完之后用stop()清理资源并结束。
+* 创建Kafka对象，使用start()进行初始化;
+* 使用send_always()发送一条信息，如需发送多条，则多次调用该方法;
+* 返回值为KFK_ERR_NOERROR时，表示正确发送信息;
+* 使用完之后用stop()清理资源并结束。
 
 ## 1.7. 从kafka获取一批信息
 具体业务需求：从同一个主题获取一批信息。<br>
-*创建Kafka对象，使用start()进行初始化;
-*使用get_always()接收一条信息，如需接收多条，则多次调用该方法;
-*返回值为KFK_ERR_NOERROR时，表示正确接收信息;
-*使用完之后用stop()清理资源并结束。
+* 创建Kafka对象，使用start()进行初始化;
+* 使用get_always()接收一条信息，如需接收多条，则多次调用该方法;
+* 返回值为KFK_ERR_NOERROR时，表示正确接收信息;
+* 使用完之后用stop()清理资源并结束。
 
 ## 1.8. 单条信息处理的简洁方法
 具体业务需求：针对指定主题处理单条信息（接收或发送）。<br>
-*创建Kafka对象
-*send_msg方法可以发送单条信息
-*get_msg方法可以接收单挑信息
-*使用简洁方法不需要用start()和stop()方法，但是只针对单条信息使用。
+* 创建Kafka对象
+* send_msg方法可以发送单条信息
+* get_msg方法可以接收单挑信息
+* 使用简洁方法不需要用start()和stop()方法，但是只针对单条信息使用。
 
 # 2. 依赖包
 使用Kafka类时，依赖的开发包有：librdkafka,cJSON,log4cplus三个。
 ## 2.1. librdkafka
 kafka的c/c++开发包，属于第三方包，需要安装<br>
 基于linux的包安装：<br>
-*下载源码 [下载地址](https://github.com/edenhill/librdkafka)
-*解压后进入目录执行：
+* 下载源码 [下载地址](https://github.com/edenhill/librdkafka)
+* 解压后进入目录执行：
 ```Bash
 ./configure
 make
 sudo make install
 ```
-*查看目录/usr/local/lib下有没有生成librdkafka*.so等库文件，如果有表示安装成功。
+* 查看目录/usr/local/lib下有没有生成librdkafka*.so等库文件，如果有表示安装成功。
 
 ## 2.2. cJSON
 处理json字符串的包，直接将源码放入项目中引用。
@@ -104,12 +104,11 @@ sudo make install
 ## 2.3. log4cplus
 c++中的日志记录包，属于第三方，需要安装<br>
 基于linux的包安装：<br>
-*下载源码 [下载地址](https://sourceforge.net/projects/log4cplus/files/log4cplus-stable/)
-*解压后进入目录执行：
+* 下载源码 [下载地址](https://sourceforge.net/projects/log4cplus/files/log4cplus-stable/)
+* 解压后进入目录执行：
 ```Bash
 ./configure
 make
 sudo make install
 ```
-*查看目录/usr/local/lib下有没有生成liblog4cplus*.so等库文件，如果有表示安装成功。
-test
+* 查看目录/usr/local/lib下有没有生成liblog4cplus*.so等库文件，如果有表示安装成功。
