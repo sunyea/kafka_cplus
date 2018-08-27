@@ -18,6 +18,7 @@ typedef enum{
     KFK_ERR_SEND_FAILED     = 12,   //生产者发送信息失败
     KFK_ERR_CONSUMER        = 20,   //消费者相关错误
     KFK_ERR_CONSUM_FAILED   = 22,   //消费者接收信息失败
+    KFK_ERR_TOPIC           = 30,   //主题相关错误
 } kafka_err;
 
 class Kafka {
@@ -106,7 +107,7 @@ private:
     string _hosts;
     int _max_buf, _max_retry, _timeout, _debug;
 
-    bool _run = true;
+    bool _run = false;
 
     RdKafka::Producer *_producer = nullptr;
     RdKafka::Consumer *_consumer = nullptr;

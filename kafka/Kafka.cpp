@@ -31,6 +31,14 @@ bool Kafka::init_producer(string &out_topic) {
     RdKafka::Conf *_conf_producer = nullptr;
     RdKafka::Conf *_conf_topic_producer = nullptr;
 
+    if (this->_run) {
+        this->_loger->error("Kafka运行中，不可再次创建Producer对象");
+        return false;
+    }
+    if (out_topic.empty()) {
+        this->_loger->error("主题不能为空");
+        return false;
+    }
     ///********************Producer部分*******************
     ///
     //创建producer配置，并设置
@@ -81,6 +89,14 @@ bool Kafka::init_consumer(string &in_topic, string &consumer_group) {
     RdKafka::Conf *_conf_consumer = nullptr;
     RdKafka::Conf *_conf_topic_consumer = nullptr;
 
+    if (this->_run) {
+        this->_loger->error("Kafka运行中，不可再次创建Consumer对象");
+        return false;
+    }
+    if (in_topic.empty()) {
+        this->_loger->error("主题不能为空");
+        return false;
+    }
     ///********************Consumer部分*******************
     ///
     //创建consumer配置，并设置
@@ -141,6 +157,10 @@ bool Kafka::init_consumer(string &in_topic, string &consumer_group) {
 }
 
 kafka_err Kafka::start(string &in_topic, string &out_topic, string &consumer_group) {
+    if(in_topic == out_topic) {
+        this->_loger->error("输入主题与输出主题不能相同");
+        return KFK_ERR_TOPIC;
+    }
     if(!(this->init_producer(out_topic)))
         return KFK_ERR_PRODUCER;
 
